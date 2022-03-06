@@ -1,0 +1,11 @@
+instalando o php:
+-basta baixar o .zip do site, coloca a pasta em alguem lugar e depois instalar as variaveis do sistema;
+-nas variaveis do sistema basta apontar o PATH para a pasta do php criada;
+
+instalar composer que é um gerenciador dos pacote do PHP;
+-configurando os repositores que o composer irá usar: 
+1: composer config -g repo.packagist composer https://packagist.org
+2: composer config -g github-protocols https ssh
+instalar o laravel que é o framework;
+-composer create-project --prefer-dist laravel/laravel projeto_laravel_via_composer "7.0"
+-carregando o laravel: entra na pasta public do laravel criado e coloca o comando: php -S localhost:8000 ou php artisan serve
