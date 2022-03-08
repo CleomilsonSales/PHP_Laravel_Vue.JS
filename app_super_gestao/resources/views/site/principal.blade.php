@@ -1,5 +1,5 @@
 <!--o .blade é um padrão do laravel, para identificar que o arquivo é um view
- o blade é um recuro de processamento do laravel -->
+ o blade é um recurso de processamento (renderização) de views do laravel -->
 <h3>Seja bem-vindo!</h3>
 
 <ul>

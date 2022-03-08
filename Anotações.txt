@@ -14,3 +14,6 @@ instalar o laravel que é o framework;
 -criando um controller:
     php artisan make:controller PrincipalController
 
+
+extensões para melhor trabalha o php no vs code:
+laravel-blade

@@ -29,7 +29,7 @@ Route::get('/login',function(){return 'Login';})->name('site.login');
 //agrupando rotas
 Route::prefix('/app')->group(function(){
     Route::get('/clientes',function(){return 'Clientes';})->name('app.cliente');
-    Route::get('/fornecedores',function(){return 'Fornecedores';})->name('app.fornecedores');
+    Route::get('/fornecedores','FornecedoresController@index')->name('app.fornecedores');
     Route::get('/produtos',function(){return 'Produtos';})->name('app.produtos');
 });
 
@@ -62,3 +62,7 @@ Route::get('/contatos/{nome}/{categoria_id}/{assunto}/{mensagem?}',function(stri
                                                                         string $mensagem = 'Mensagem não enviada'){
     echo "Estamos aqui: $nome - $categoria_id - $assunto - $mensagem";
 })->where('categoria_id','[0-9]+')->where('nome','[A-Za-z]+');
+
+
+//enviando parametros de route para controller
+Route::get('/envio_p/{p1}/{p2}','EnvioPController@envioP')-> name('site.envio_p');
