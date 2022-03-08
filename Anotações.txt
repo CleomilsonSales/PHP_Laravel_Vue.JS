@@ -9,3 +9,8 @@ instalar composer que é um gerenciador dos pacote do PHP;
 instalar o laravel que é o framework;
 -composer create-project --prefer-dist laravel/laravel projeto_laravel_via_composer "7.0"
 -carregando o laravel: entra na pasta public do laravel criado e coloca o comando: php -S localhost:8000 ou php artisan serve
+
+-Comandos artisan:
+-criando um controller:
+    php artisan make:controller PrincipalController
+
