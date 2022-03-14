@@ -10,6 +10,6 @@ class PrincipalController extends Controller
     public function principal(){
         //echo 'Olá, seja bem-vindo!';
         //site.principal é o caminho onde esta a view, sendo site a subpasta e o principal o nome do arquivo omitindo o .blace.php, pq o laravel ja entende isso
-        return view('site.principal');
+        return view('site.principal',['titulo'=>'Home']);
     }
 }
