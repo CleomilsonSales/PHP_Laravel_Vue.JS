@@ -32,7 +32,7 @@ extensões para melhor trabalha o php no vs code:
 laravel-blade
 
 
--comando das migratinos
+-comando das migrations
     obs.:  as variavel do database.php da pasta conf ficam dentro do .env 
     
     COMANDO para up: php artisan migrate

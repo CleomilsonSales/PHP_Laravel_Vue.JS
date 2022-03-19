@@ -1,4 +1,6 @@
 create database sg;
 use sg;
 
-select * from site_contatos
+select * from migrations;
+
+describe produtos;
