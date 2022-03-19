@@ -35,9 +35,11 @@ return [
 
     'connections' => [
 
+        //env são as variaveis de sistema, nesse caso qual sera o banco usado fica no arquivo .env
+
         'sqlite' => [
             'driver' => 'sqlite',
-            'url' => env('DATABASE_URL'),
+            'url' => env('DATABASE_URL'), 
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),

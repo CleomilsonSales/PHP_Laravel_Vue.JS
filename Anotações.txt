@@ -13,7 +13,36 @@ instalar o laravel que é o framework;
 -Comandos artisan:
 -criando um controller:
     php artisan make:controller PrincipalController
+-criando um model (nome sempre no singular)   
+    php artisan make:model SiteContato
+
+    nesse caso tem que criar as migrations na mão (bom para corrigir a questão do plural na criação das tabelas)
+    COMANDO: php artisan make:migration create_fornecedores_table
+
+    criando um alter table
+    php artisan make:migration alter_fornecedores_novas_colunas
+
+-criando um model com migrations (nome sempre no singular, pq o migrations transforma no plural) 
+    php artisan make:model SiteContato -m
+
+    
 
 
 extensões para melhor trabalha o php no vs code:
 laravel-blade
+
+
+-comando das migratinos
+    obs.:  as variavel do database.php da pasta conf ficam dentro do .env 
+    
+    COMANDO para up: php artisan migrate
+    COMANDO para down: php artisan migrate:rollback (esse faz apenas no ultimo)
+    COMANDO para down: php artisan migrate:rollback --step=2 (diz quanto rollback deve haver)
+
+    obs.: se aparece o erro ("could not find driver") tem ir no php.ini e descomentar o trecho "extension=pdo_sqlite " retirando o ";"
+
+
+--testando pelo terminal se uma extenção esta carregado do laravel
+php -r "var_dump(extension_loaded('pdo_mysql'));"
+obs.: se estiver false deve ir no php.ini e habilitar a mesma tirando o ";"
+

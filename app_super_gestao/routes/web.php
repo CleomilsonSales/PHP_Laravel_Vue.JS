@@ -23,7 +23,11 @@ use Illuminate\Support\Facades\Route;
 //name é um apelido para as rotas para usar dentro da aplicação para tirar as dependencias absolutas com os links
 Route::get('/','PrincipalController@principal')->name('site.index');
 Route::get('/sobre-nos','SobreNosController@sobreNos')->name('site.sobrenos');
+
 Route::get('/contatos','ContatosController@contato')->name('site.contato');
+//obs.: o post no laravel exigi um token
+Route::post('/contatos','ContatosController@contato')->name('site.contato');
+
 Route::get('/login',function(){return 'Login';})->name('site.login');
 
 //agrupando rotas

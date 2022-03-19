@@ -8,6 +8,8 @@
     </head>
 
     <body>
+        <!-- inclusão de views -->
+        @include('site.layouts._partials.topo');
         <!--recebendo o section-->
         @yield('conteudo')
     </body>
