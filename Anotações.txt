@@ -25,7 +25,14 @@ instalar o laravel que é o framework;
 -criando um model com migrations (nome sempre no singular, pq o migrations transforma no plural) 
     php artisan make:model SiteContato -m
 
-    
+
+-usando o tinker para testar os models
+    php artisan tinker    
+
+    -comandos do tinker
+    instanciando um objeto no teste: $variavel = new \App\SiteContato();
+    exibindo informações: print_r($variavel->getAttributes());
+    salvando no banco: $variavel->save();
 
 
 extensões para melhor trabalha o php no vs code:
@@ -40,6 +47,18 @@ laravel-blade
     COMANDO para down: php artisan migrate:rollback --step=2 (diz quanto rollback deve haver)
 
     obs.: se aparece o erro ("could not find driver") tem ir no php.ini e descomentar o trecho "extension=pdo_sqlite " retirando o ";"
+
+    //atalho pra ver a tabela migrations do banco
+    php artisan migrate:status
+
+    //faz todos os rollbacks resetando todo o banco
+    php artisan migrate:reset
+
+    //faz o reset (com rollback) e em seguida executa todas as migrations
+    php artisan migrate:refresh
+
+    //faz o drop de tudo (não é rollback) e em seguida cria tudo de novo
+    php artisan migrate:fresh
 
 
 --testando pelo terminal se uma extenção esta carregado do laravel
