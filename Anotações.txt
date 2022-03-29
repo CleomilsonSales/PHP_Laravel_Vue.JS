@@ -33,6 +33,28 @@ instalar o laravel que é o framework;
     instanciando um objeto no teste: $variavel = new \App\SiteContato();
     exibindo informações: print_r($variavel->getAttributes());
     salvando no banco: $variavel->save();
+    sair do tinker: quit
+    colocando a class no contexto pra facilitar a chamada dela: use \App\Fornecedor;
+    usando metodo create no tinker: \App\Fornecedor::create(['nome'=>'FonecedorX','site'=>'fornecedorx.com.br','uf'=>'CE','email'=>'fornecedorex@fornecedrox.cm.br']);
+    trazendo tudo de banco: \App\Fornecedor::all();
+    tranzendo o metodo all com aparecia de uma array : print_r($fonecedores->toArray());
+    trazendo com o metodo find (aqui estou usando o use): $fornecedor2 = Fornecedor::find([1,2]);
+    usando o where no tinker (operadores: diferente-> <>, igual -> == ou não informa nada ): $fornecedores2 = Fornecedor::where('id','>',1)->get();
+    usando o where com o In no tinker: $fornecedores2 = Fornecedor::whereIn('id',[1,3])->get();
+    usando o where diferente do In no tinker: $fornecedores2 = Fornecedor::whereNotIn('id',[1,3])->get();
+    usando o where entre valores no tinker: $fornecedores2 = Fornecedor::whereBetween('id',[1,3])->get();
+    usando o where fora do entre valores no tinker: $fornecedores2 = Fornecedor::whereNotBetween('id',[1,3])->get();
+    o operador logico AND no where basta usar o "->" podendo ter varios    
+    o operador logico OR no where basta usar o "->" com o "or" antes da condição (WhereIn), podendo ter varios: ->orWhereIn    
+    usando is null: whereNull('nome')->get();
+    usando is not null: whereNotNull('nome')->get();
+    where com data: whereDate('created_at','2022-03-28'); ou whereDay('created_at','28'); ou whereMonth('created_at','03'); ou whereYear('created_at','2022'); ou whereTime('created_at','=','21:09:01');
+    where entre colunas (igual é sem parametros): whereColumn('created_at','<>','updated_at');
+    grupo de condições (precisa de função callback): $fornecedores = $Fornecedor::where(funcion($query){$query->where('nome','jorge')})->where(function($query){$query->whereIn('uf',['CE','SP'])})-get();
+    order by: $fornecedores2 = Fornecedor::whereIn('id',[1,3])->orderBy('nome','asc')->get();
+
+    loop com o foreach: foreach($fornecedores as $f){echo $f->nome;echo ' - ';}
+
 
 
 extensões para melhor trabalha o php no vs code:
