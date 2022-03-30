@@ -55,11 +55,15 @@ instalar o laravel que é o framework;
 
     loop com o foreach: foreach($fornecedores as $f){echo $f->nome;echo ' - ';}
 
-
+    --colletions
+    primeiro registro: $fornecedores2->first();
+    ultimo registro: $fornecedores2->last();
+    invertendo array dos registro: $fornecedores2->reverse();
+    convertendo a coleção do objeto em um json: Fornecedor::all()->toJson();
+    pluck retorno o valor de uma chave de toda a coleção: Fornecedor::all()->pluck('email','nome');
 
 extensões para melhor trabalha o php no vs code:
 laravel-blade
-
 
 -comando das migrations
     obs.:  as variavel do database.php da pasta conf ficam dentro do .env 
@@ -87,3 +91,11 @@ laravel-blade
 php -r "var_dump(extension_loaded('pdo_mysql'));"
 obs.: se estiver false deve ir no php.ini e habilitar a mesma tirando o ";"
 
+--Seeders Class sementes para o povoar o banco de dados
+php artisan make:seeder FornecedorSeeder
+
+executando os seeders: php artisan db:seed
+executar um seeder especifico: php artisan db:seed --class=SiteContatoSeeder
+
+--factories - semear em massa atravez do seeders
+php artisan make:factory SiteContatoFactory --model=SiteContato

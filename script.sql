@@ -8,4 +8,4 @@ describe filiais;
 describe produto_filiais;
 describe fornecedores;
 
-select * from site_contato;
+select * from site_contatos;
