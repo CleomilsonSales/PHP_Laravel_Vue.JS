@@ -26,7 +26,7 @@ Route::get('/sobre-nos','SobreNosController@sobreNos')->name('site.sobrenos');
 
 Route::get('/contatos','ContatosController@contato')->name('site.contato');
 //obs.: o post no laravel exigi um token
-Route::post('/contatos','ContatosController@contato')->name('site.contato');
+Route::post('/contatos','ContatosController@salvar')->name('site.contato');
 
 Route::get('/login',function(){return 'Login';})->name('site.login');
 

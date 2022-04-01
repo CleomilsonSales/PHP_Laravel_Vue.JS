@@ -31,7 +31,7 @@
                 <p>Caso tenha qualquer dúvida por favor entre em contato com nossa equipe pelo formulário abaixo.<p>
                 <!-- um include que aceita parametros para melhor o carrgamento da view 
                     ele pode ser um array associativo na chamada da view ou por slot (em contato)-->
-                @component('site.layouts._components.form_contato',['x'=>10, 'classe'=> 'borda-branca'])
+                @component('site.layouts._components.form_contato',['x'=>10, 'classe'=> 'borda-branca','motivo_contatos'=>$motivo_contatos])
                 @endcomponent;
             </div>
         </div>

@@ -11,7 +11,7 @@
 
         <div class="informacao-pagina">
             <div class="contato-principal">
-                @component('site.layouts._components.form_contato',['x'=>10, 'classe'=> 'borda-preta'])
+                @component('site.layouts._components.form_contato',['x'=>10, 'classe'=> 'borda-preta','motivo_contatos' => $motivo_contatos])
                     <!-- usando slot -->
                     <p>A nossa equipe analisará a sua mensagem em breve </p>
                     <p>Nosso tempo de resposta é de 48 horas</p>
