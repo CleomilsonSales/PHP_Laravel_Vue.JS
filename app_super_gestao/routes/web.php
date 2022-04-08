@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\LogAcessoMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,16 @@ use Illuminate\Support\Facades\Route;
 
 //o laravel reconhece que a string tem o nome de uma Controller e faz a trataiva do callback
 //name é um apelido para as rotas para usar dentro da aplicação para tirar as dependencias absolutas com os links
+/*
+usando middleware separado
+Route::middleware(LogAcessoMiddleware::class)
+    ->get('/','PrincipalController@principal')
+    ->name('site.index');
+
+
+    //middleware por apelido
+    ->middleware('log.acesso')
+*/
 Route::get('/','PrincipalController@principal')->name('site.index');
 Route::get('/sobre-nos','SobreNosController@sobreNos')->name('site.sobrenos');
 
@@ -31,10 +42,14 @@ Route::post('/contatos','ContatosController@salvar')->name('site.contato');
 Route::get('/login',function(){return 'Login';})->name('site.login');
 
 //agrupando rotas
-Route::prefix('/app')->group(function(){
-    Route::get('/clientes',function(){return 'Clientes';})->name('app.cliente');
-    Route::get('/fornecedores','FornecedoresController@index')->name('app.fornecedores');
-    Route::get('/produtos',function(){return 'Produtos';})->name('app.produtos');
+Route::middleware('autenticacao:padrao,visitante')->
+    prefix('/app')->group(function(){
+        Route::get('/clientes',function(){return 'Clientes';})
+            ->name('app.cliente');
+        Route::get('/fornecedores','FornecedoresController@index')
+            ->name('app.fornecedores');
+        Route::get('/produtos',function(){return 'Produtos';})
+            ->name('app.produtos');
 });
 
 Route::get('/rota1',function(){

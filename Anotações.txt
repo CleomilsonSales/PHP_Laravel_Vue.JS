@@ -99,3 +99,9 @@ executar um seeder especifico: php artisan db:seed --class=SiteContatoSeeder
 
 --factories - semear em massa atravez do seeders
 php artisan make:factory SiteContatoFactory --model=SiteContato
+
+
+--criando middlewares
+    o kernel.php serve para atribuir o middleware para todas rotas web
+/* Middleware é um mecanismo para filtrar requisições http na aplicação*/
+php artisan make:middleware LogAcessoMiddleware
