@@ -21,10 +21,17 @@ class AutenticacaoMiddleware
             echo 'Será um metodo de autenticação padrão';
         }*/
         
-        if(true){
+        /*if(true){
             return $next($request);
         }else{
             return Response('Acesso negado');
-        }        
+        }       */
+        
+        session_start();
+        if(isset($_SESSION['email']) && $_SESSION['email'] != ''){
+            return $next($request);
+        }else{
+           return redirect()->route('site.login',['erro' => 2]);
+        }
     }
 }

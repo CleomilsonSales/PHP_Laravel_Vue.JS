@@ -16,4 +16,8 @@ select * from motivo_contatos;
 
 select * from site_contatos;
 
-select * from log_acessos
+select * from log_acessos;
+
+select * from users;
+describe users;
+insert into users (name, email, password)values('Cleomilson','cleomilsonsales@hotmail.com','1234');

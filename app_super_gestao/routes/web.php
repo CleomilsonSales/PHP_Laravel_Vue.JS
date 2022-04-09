@@ -38,18 +38,22 @@ Route::get('/sobre-nos','SobreNosController@sobreNos')->name('site.sobrenos');
 Route::get('/contatos','ContatosController@contato')->name('site.contato');
 //obs.: o post no laravel exigi um token
 Route::post('/contatos','ContatosController@salvar')->name('site.contato');
-
-Route::get('/login',function(){return 'Login';})->name('site.login');
+//o simbolo ? torna o parametro não obrigatorio 
+Route::get('/login/{erro?}','LoginController@index')->name('site.login');
+Route::post('/login','LoginController@autenticar')->name('site.login');
 
 //agrupando rotas
 Route::middleware('autenticacao:padrao,visitante')->
     prefix('/app')->group(function(){
-        Route::get('/clientes',function(){return 'Clientes';})
-            ->name('app.cliente');
-        Route::get('/fornecedores','FornecedoresController@index')
-            ->name('app.fornecedores');
-        Route::get('/produtos',function(){return 'Produtos';})
-            ->name('app.produtos');
+        Route::get('/home','HomeController@index')->name('app.home');
+        Route::get('/sair','LoginController@sair')->name('app.sair');
+        Route::get('/cliente','ClienteController@index')->name('app.cliente');
+        //Route::get('/fornecedore','FornecedoresController@index')->name('app.fornecedore');
+        Route::get('/fornecedor','FornecedorController@index')->name('app.fornecedor');
+        Route::post('/fornecedor/listar','FornecedorController@listar')->name('app.fornecedor.listar');
+        Route::get('/fornecedor/adicionar','FornecedorController@adicionar')->name('app.fornecedor.adicionar');
+
+        Route::get('/produto','ProdutoController@index')->name('app.produto');
 });
 
 Route::get('/rota1',function(){
