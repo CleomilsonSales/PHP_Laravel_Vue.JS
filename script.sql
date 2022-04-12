@@ -21,3 +21,5 @@ select * from log_acessos;
 select * from users;
 describe users;
 insert into users (name, email, password)values('Cleomilson','cleomilsonsales@hotmail.com','1234');
+
+select * from fornecedores;

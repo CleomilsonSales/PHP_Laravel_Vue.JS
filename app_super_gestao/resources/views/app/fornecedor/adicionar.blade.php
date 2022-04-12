@@ -16,12 +16,20 @@
         </div>
 
         <div class="informacao-pagina">
+            {{ $msg ?? '' }}
             <div style="width:30%; margin-left:auto;margin-right:auto;">
-                <form method="post" action="">
-                    <input type="text" name="nome" placeholder="Nome" class="borda-preta">
-                    <input type="text" name="site" placeholder="Site" class="borda-preta">
-                    <input type="text" name="uf" placeholder="UF" class="borda-preta">
-                    <input type="text" name="email" placeholder="E-mail" class="borda-preta">
+                <form method="post" action="{{ route('app.fornecedor.adicionar') }}">
+                    <input type="hidden" name="id" value="{{ $fornecedor->id ?? '' }}">
+                    @csrf
+                    <!-- relembrando que o ?? é o operador tenario, nesse caso se a condição for verdadeira retorna ela, se não retorna outra coisa -->
+                    <input type="text" name="nome" value="{{ $fornecedor->nome ?? old('nome') }}" placeholder="Nome" class="borda-preta">
+                    {{ $errors->has('nome') ? $errors->first('nome') : '' }}
+                    <input type="text" name="site" value="{{ $fornecedor->site ?? old('site') }}" placeholder="Site" class="borda-preta">
+                    {{ $errors->has('site') ? $errors->first('site') : '' }}
+                    <input type="text" name="uf" value="{{ $fornecedor->uf ?? old('uf') }}" placeholder="UF" class="borda-preta">
+                    {{ $errors->has('uf') ? $errors->first('uf') : '' }}
+                    <input type="text" name="email" value="{{ $fornecedor->email ?? old('email') }}" placeholder="E-mail" class="borda-preta">
+                    {{ $errors->has('email') ? $errors->first('email') : '' }}
                     <button type="submit" class="borda-preta">Cadastrar</button>
                 </form>
             </div>
