@@ -17,17 +17,28 @@ class FornecedorController extends Controller
         return view('app.fornecedor.adicionar',['fornecedor'=>$fornecedor,'msg'=>$msg]);
     }
 
+    public function excluir($id){
+        /*
+        delete é o softdelete
+        forceDelete excluir realmente o registro do banco
+        */
+        $fornecedor = Fornecedor::find($id)->delete();
+        
+        return redirect()->route('app.fornecedor');
+    }
+
+
     public function listar(Request $request){
 
         $fornecedores = Fornecedor::where('nome','like','%'.$request->input('nome').'%')
             ->where('site','like','%'.$request->input('site').'%')
             ->where('uf','like','%'.$request->input('uf').'%')
             ->where('email','like','%'.$request->input('email').'%')
-            ->get();
+            ->paginate(2); 
 
         //dd($fornecedores);
 
-        return view('app.fornecedor.listar',['fornecedores'=>$fornecedores]);
+        return view('app.fornecedor.listar',['fornecedores'=>$fornecedores, 'request'=>$request->all()]);
     }
 
     public function adicionar(Request $request){

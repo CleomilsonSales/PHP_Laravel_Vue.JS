@@ -13,6 +13,10 @@ instalar o laravel que é o framework;
 -Comandos artisan:
 -criando um controller:
     php artisan make:controller PrincipalController
+
+    --criando controle com metodos padronizado conforme da convenção do laravel
+    php artisan make:controller -r ProdutoController --model=Produto
+
 -criando um model (nome sempre no singular)   
     php artisan make:model SiteContato
 
