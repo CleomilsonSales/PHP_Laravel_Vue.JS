@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Produto;
 use Illuminate\Http\Request;
+use App\Unidade;
+
 
 class ProdutoController extends Controller
 {
@@ -12,9 +14,11 @@ class ProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $produtos = Produto::paginate(10); 
+
+        return view('app.produto.index',['produtos' => $produtos,'request'=>$request->all()]);
     }
 
     /**
@@ -24,7 +28,8 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        $unidades = Unidade::all();
+        return view('app.produto.create',['unidades'=>$unidades]);
     }
 
     /**
@@ -35,7 +40,26 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regra = [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'required|min:3|max:2000',
+            'peso' => 'required|integer',
+            'unidade_id' => 'exists:unidades,id' //verificando se a chave estrageira existe: exists:<table>,<column>
+        ];
+
+        $feedback = [
+            'required' => 'Campo obrigatorio',
+            'min' => 'Informa no minimo 3 caracteres',
+            'nome.max' => 'Informa no maximo 40 caracteres',
+            'descricao.max' => 'Informa no maximo 2000 caracteres',
+            'integer' => 'Campo deve ser inteiro',
+            'exists' => 'Valor não encontrado na tabela'
+        ];
+
+        $request->validate($regra,$feedback);
+        
+        Produto::create($request->all());
+        return redirect()->route('produto.index');
     }
 
     /**
