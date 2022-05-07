@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Produto;
 use Illuminate\Http\Request;
 use App\Unidade;
+use App\ProdutoDetalhe;
+use App\Item;
 
 
 class ProdutoController extends Controller
@@ -17,6 +19,28 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         $produtos = Produto::paginate(10); 
+        //quando o nome do objeto não esta igual ao nome da tabela e o laravel não encontra
+        //$produtos = Item::paginate(10); 
+
+        /*
+        //eloquent ORM na mão para fazer o hasOne que criar relação mestre detalhe
+        //no eloquent ORM é criado um metodo no modelo Produto
+        foreach($produtos as $key => $produto){
+            //print_r($produto->getAttributes());
+            //echo '<br><br>';
+
+            $produtoDetalhe = ProdutoDetalhe::where('produto_id',$produto->id)->first();
+            if(isset($produtoDetalhe)){
+                //print_r($produtoDetalhe->getAttributes());
+
+                //alterando o array original que monta a view
+                $produtos[$key]['comprimento'] = $produtoDetalhe->comprimento;
+                $produtos[$key]['largura'] = $produtoDetalhe->largura;
+                $produtos[$key]['altura'] = $produtoDetalhe->altura;
+
+            }
+            //echo '<hr>';
+        }   */
 
         return view('app.produto.index',['produtos' => $produtos,'request'=>$request->all()]);
     }
@@ -83,6 +107,7 @@ class ProdutoController extends Controller
     {
         $unidades = Unidade::all();
         return view('app.produto.edit',['produto'=>$produto,'unidades'=>$unidades]);
+        //return view('app.produto.create',['produto'=>$produto,'unidades'=>$unidades]);
     }
 
     /**

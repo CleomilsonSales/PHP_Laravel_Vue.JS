@@ -58,6 +58,7 @@ Route::middleware('autenticacao:padrao,visitante')->
         Route::get('/fornecedor/excluir/{id}}','FornecedorController@excluir')->name('app.fornecedor.excluir');
         //resource criar as rodas com base no metodos padrões
         Route::resource('produto','ProdutoController');
+        Route::resource('produto-detalhe','ProdutoDetalheController');
 });
 
 Route::get('/rota1',function(){

@@ -24,6 +24,9 @@
                             <th>Descrição</th>
                             <th>Peço</th>
                             <th>Unidade_id</th>
+                            <th>Comprimento</th>
+                            <th>Altura</th>
+                            <th>Largura</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -35,6 +38,15 @@
                                 <th>{{ $produto->descricao }}</th>
                                 <th>{{ $produto->peso}}</th>
                                 <th>{{ $produto->unidade_id }}</th>
+                                {{-- forma manual do eloquent ORM 
+                                <th>{{ $produto->comprimento ?? ' ' }}</th>
+                                <th>{{ $produto->altura ?? ' ' }}</th>
+                                <th>{{ $produto->largura ?? ' ' }}</th>
+                                --}}
+                                <!-- produtoDetalhe é um metodo no modelo Produto -->
+                                <th>{{ $produto->produtoDetalhe->comprimento ?? ' ' }}</th>
+                                <th>{{ $produto->produtoDetalhe->altura ?? ' ' }}</th>
+                                <th>{{ $produto->produtoDetalhe->largura ?? ' ' }}</th>
                                  <th><a href="{{ route('produto.show',['produto' => $produto->id]) }}">Visualizar</a></th>
                                 <th>
                                     <form id="form_{{ $produto->id }}" method="post" action="{{ route('produto.destroy',['produto' => $produto->id]) }}">

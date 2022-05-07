@@ -25,3 +25,5 @@ insert into users (name, email, password)values('Cleomilson','cleomilsonsales@ho
 select * from fornecedores;
 select * from produtos;
 select * from unidades;
+
+select * from produto_detalhes;
