@@ -47,7 +47,6 @@ Route::middleware('autenticacao:padrao,visitante')->
     prefix('/app')->group(function(){
         Route::get('/home','HomeController@index')->name('app.home');
         Route::get('/sair','LoginController@sair')->name('app.sair');
-        Route::get('/cliente','ClienteController@index')->name('app.cliente');
         //Route::get('/fornecedore','FornecedoresController@index')->name('app.fornecedore');
         Route::get('/fornecedor','FornecedorController@index')->name('app.fornecedor');
         Route::post('/fornecedor/listar','FornecedorController@listar')->name('app.fornecedor.listar');
@@ -59,6 +58,12 @@ Route::middleware('autenticacao:padrao,visitante')->
         //resource criar as rodas com base no metodos padrões
         Route::resource('produto','ProdutoController');
         Route::resource('produto-detalhe','ProdutoDetalheController');
+        
+        Route::resource('cliente','ClienteController');
+        Route::resource('pedido','PedidoController');
+        //Route::resource('pedido-produto','PedidoProdutoController');
+        Route::get('pedido-produto/create/{pedido}}','PedidoProdutoController@create')->name('pedido-produto.create');
+        Route::post('pedido-produto/store/{pedido}}','PedidoProdutoController@store')->name('pedido-produto.store');
 });
 
 Route::get('/rota1',function(){

@@ -17,6 +17,13 @@ class Fornecedor extends Model
     protected $table = 'fornecedores'; 
     //autorizando o metodo estatico create a usar os campos
     protected $fillable = ['nome','site','uf','email'];
+
+    //eloquent ORM 1 para N
+    public function produtos(){
+        return $this->hasMany('App\Produto','fornecedor_id','id');
+        //como o nome do objetos sem o padrão de nomeclatura do laravel não precisa informa a fk e pk
+        //return $this->hasMany('App\Produto');
+    }
 }
 
 

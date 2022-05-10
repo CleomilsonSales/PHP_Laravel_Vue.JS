@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Unidade;
 use App\ProdutoDetalhe;
 use App\Item;
+use App\Fornecedor;
 
 
 class ProdutoController extends Controller
@@ -54,7 +55,8 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produto.create',['unidades'=>$unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.create',['unidades'=>$unidades,'fornecedores'=>$fornecedores]);
     }
 
     /**
@@ -69,7 +71,8 @@ class ProdutoController extends Controller
             'nome' => 'required|min:3|max:40',
             'descricao' => 'required|min:3|max:2000',
             'peso' => 'required|integer',
-            'unidade_id' => 'exists:unidades,id' //verificando se a chave estrageira existe: exists:<table>,<column>
+            'unidade_id' => 'exists:unidades,id', //verificando se a chave estrageira existe: exists:<table>,<column>
+            'fornecedor_id' => 'exists:fornecedores,id'
         ];
 
         $feedback = [
@@ -107,7 +110,8 @@ class ProdutoController extends Controller
     public function edit(Produto $produto)
     {
         $unidades = Unidade::all();
-        return view('app.produto.edit',['produto'=>$produto,'unidades'=>$unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.edit',['produto'=>$produto,'unidades'=>$unidades,'fornecedores'=>$fornecedores]);
         //return view('app.produto.create',['produto'=>$produto,'unidades'=>$unidades]);
     }
 
@@ -120,6 +124,25 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
+        $regra = [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'required|min:3|max:2000',
+            'peso' => 'required|integer',
+            'unidade_id' => 'exists:unidades,id', //verificando se a chave estrageira existe: exists:<table>,<column>
+            'fornecedor_id' => 'exists:fornecedores,id'
+        ];
+
+        $feedback = [
+            'required' => 'Campo obrigatorio',
+            'min' => 'Informa no minimo 3 caracteres',
+            'nome.max' => 'Informa no maximo 40 caracteres',
+            'descricao.max' => 'Informa no maximo 2000 caracteres',
+            'integer' => 'Campo deve ser inteiro',
+            'exists' => 'Valor não encontrado na tabela'
+        ];
+
+        $request->validate($regra,$feedback);
+        
         /*
         print_r($request->all()); //é o payload, o que esta vindo do form
         print_r($produto->getAttributes()); //instancia do objeto no estado anterior

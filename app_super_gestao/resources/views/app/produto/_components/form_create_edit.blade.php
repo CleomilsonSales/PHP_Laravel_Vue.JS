@@ -8,6 +8,14 @@
 @endif
     <input type="hidden" name="id" value="{{ $produto->id ?? '' }}">
     <!-- relembrando que o ?? é o operador tenario, nesse caso se a condição for verdadeira retorna ela, se não retorna outra coisa -->
+    <select name="fornecedor_id">
+        <option>Selecione um Fornecedor</option>
+        @foreach($fornecedores as $fornecedor)
+            <option value="{{ $fornecedor->id }}" {{ ($produto->fornecedor_id ?? old('fornecedor_id')) == $fornecedor->id ? 'selected' : '' }}>{{ $fornecedor->nome }}</option>
+        @endforeach
+    </select>
+    {{ $errors->has('fornecedor_id') ? $errors->first('fornecedor_id') : '' }}
+    
     <input type="text" name="nome" value="{{ $produto->nome ?? old('nome') }}" placeholder="Nome" class="borda-preta">
     {{ $errors->has('nome') ? $errors->first('nome') : '' }}
     <input type="text" name="descricao" value="{{ $produto->descricao ?? old('descricao') }}" placeholder="descricao" class="borda-preta">

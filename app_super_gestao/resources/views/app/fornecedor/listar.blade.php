@@ -38,6 +38,28 @@
                                 <th><a href="{{ route('app.fornecedor.excluir',$fornecedor->id) }}">Excluir</a></th>
                                 <th><a href="{{ route('app.fornecedor.editar',$fornecedor->id) }}">Editar</a></th>
                             </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <p>Lista de produtos</p>
+                                    <table border="1" style="margin:20px">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nome</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- hasMany definido no model fornecedor-->
+                                            @foreach($fornecedor->produtos as $key => $produto)
+                                                <tr>
+                                                    <th>{{ $produto->id }}</th>
+                                                    <th>{{ $produto->nome }}</th>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
