@@ -17,11 +17,15 @@
 
         <div class="informacao-pagina">
             <div style="width:90%; margin-left:auto;margin-right:auto;">
+                {{-- teste Lazy Loadign e Eager Loadign --}}
+                {{-- {{ $produtos->toJson() }} --}}
                 <table border="1" width="100%">
                     <thead>
                         <tr>
                             <th>Nome</th>
                             <th>Descrição</th>
+                            <th>Nome do Fornecedor</th>
+                            <th>Site do Fornecedor</th>
                             <th>Peço</th>
                             <th>Unidade_id</th>
                             <th>Comprimento</th>
@@ -36,6 +40,8 @@
                             <tr>
                                 <th>{{ $produto->nome }}</th>
                                 <th>{{ $produto->descricao }}</th>
+                                <th>{{ $produto->fornecedor->nome}}</th>
+                                <th>{{ $produto->fornecedor->site}}</th>
                                 <th>{{ $produto->peso}}</th>
                                 <th>{{ $produto->unidade_id }}</th>
                                 {{-- forma manual do eloquent ORM 

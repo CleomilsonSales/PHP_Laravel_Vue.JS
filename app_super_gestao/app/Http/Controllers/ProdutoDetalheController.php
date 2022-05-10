@@ -64,7 +64,7 @@ class ProdutoDetalheController extends Controller
     //public function edit($id)
     {
         //quando o nome do objeto não esta igual ao nome da tabela e o laravel não encontra
-        //$produtoDetalhe = ItemDetalhe::find($id);
+        //$produtoDetalhe = ItemDetalhe::with(['produto'])->find($id);
 
         //dd($produtoDetalhe);
         $unidades = Unidade::all();

@@ -18,7 +18,8 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
-        $produtos = Produto::paginate(10); 
+        //with(['produtoDetalhe']) esse trecho serve para fazer o Eager Loading, que serve para carregar as relações mesmo antes de serem usadas 
+        $produtos = Produto::with(['produtoDetalhe','fornecedor'])->paginate(10); 
         //quando o nome do objeto não esta igual ao nome da tabela e o laravel não encontra
         //$produtos = Item::paginate(10); 
 

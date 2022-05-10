@@ -18,7 +18,6 @@
             <!-- aplicando o belongTo (pertence a) ou seja 1 para 1, mas ao contrario da tabela mais fraca para mais forte 
             lembrando que produto é um metodo do model produtoDetalhe
             -->
-
             <h4>Produto</h4>
             <div>Nome: {{ $produto_detalhe->produto->nome }}</div>
             <br>

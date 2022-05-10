@@ -19,4 +19,9 @@ class Produto extends Model
         //1 para 1
         return $this->hasOne('App\ProdutoDetalhe');
     }
+
+    //eloquent ORM 1 para N
+    public function fornecedor(){
+        return $this->belongsTo('App\Fornecedor');
+    }
 }
