@@ -49,19 +49,32 @@ class PedidoProdutoController extends Controller
         echo '</pre>';
         */
         $regra = [
-            'produto_id' => 'exists:produtos,id'
+            'produto_id' => 'exists:produtos,id',
+            'quantidade' => 'required'
         ];
 
         $feedback = [
-            'exists' => 'produto não encontrado na tabela'
+            'exists' => 'produto não encontrado na tabela',
+            'required' => 'campo :attribute é obrigatorio'
         ];
 
         $request->validate($regra,$feedback);
-
+        /*
         $pedidoProduto = new PedidoProduto();
         $pedidoProduto->pedido_id = $pedido->id;
         $pedidoProduto->produto_id = $request->get('produto_id');
+        $pedidoProduto->quantidade = $request->get('quantidade');
         $pedidoProduto->save();
+        */
+
+        //insert do relacionamento pelo metodo de belongsToMany do objeto Pedido
+        /* $pedido->produtos  dessa forma de atributo eu retorno o relacionamento
+        se informe o (), estou retorno o objeto
+        attach(<id do produto>,) serve para fazer uma inserção no relacionamento*/
+        $pedido->produtos()->attach(
+            $request->get('produto_id'),
+            ['quantidade'=> $request->get('quantidade')]
+        );
 
         return redirect()->route('pedido-produto.create',['pedido'=>$pedido->id]);
 
@@ -107,8 +120,31 @@ class PedidoProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    //public function destroy(Pedido $pedido, Produto $produto) //era sem a tratativa para não retirar relacionamento duplicado
+    public function destroy(PedidoProduto $pedidoProduto, $pedido_id)
     {
-        //
+        /* teste
+        print_r($pedido->getAttributes());
+        echo '<hr>';
+        print_r($produto->getAttributes());
+        */
+
+        /*
+        //modo convencional
+        PedidoProduto::where([
+            'pedido_id'=>$pedido->id,
+            'produto_id'=>$produto->id
+        ])->delete();
+        */
+
+        /*
+        //delete pelo relacionamento com o detach
+        $pedido->produtos()->detach($produto->id);
+        */
+
+        $pedidoProduto->delete();
+
+        //return redirect()->route('pedido-produto.create',['pedido'=>$pedido->id]);
+        return redirect()->route('pedido-produto.create',['pedido'=>$pedido_id]);
     }
 }

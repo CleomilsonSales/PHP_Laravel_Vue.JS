@@ -9,8 +9,9 @@ class Pedido extends Model
     protected $fillable = ['cliente_id'];
 
     //eloquent ORM - N para N
-    protected function produtos(){
-        return $this->belongsToMany('App\Produto','pedidos_produtos');
+    public function produtos(){
+        return $this->belongsToMany('App\Produto','pedidos_produtos')
+            ->withPivot('id','created_at','updated_at'); //usado para incluir colocas no pivot do relacionamento
         //quando a class não esta padronizada com a tabela
         /*
         parametros:

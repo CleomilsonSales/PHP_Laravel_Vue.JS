@@ -6,9 +6,16 @@ instalar composer que é um gerenciador dos pacote do PHP;
 -configurando os repositores que o composer irá usar: 
 1: composer config -g repo.packagist composer https://packagist.org
 2: composer config -g github-protocols https ssh
-instalar o laravel que é o framework;
+instalar o laravel que é o framework:
 -composer create-project --prefer-dist laravel/laravel projeto_laravel_via_composer "7.0"
+//caso haja problema de compatibilidade do php com o laravel mas ver usar esse versão mesmo assim, incluir o comando: --ignore-platform-req=ext-fileinfo
+-composer create-project --ignore-platform-req=ext-fileinfo laravel/laravel app_controle_tarefas "8.5.9"
+
 -carregando o laravel: entra na pasta public do laravel criado e coloca o comando: php -S localhost:8000 ou php artisan serve
+
+composer create-project  php laravel/laravel app_controle_tarefas "8.5.9"
+
+
 
 -Comandos artisan:
 -criando um controller:
@@ -109,3 +116,12 @@ php artisan make:factory SiteContatoFactory --model=SiteContato
     o kernel.php serve para atribuir o middleware para todas rotas web
 /* Middleware é um mecanismo para filtrar requisições http na aplicação*/
 php artisan make:middleware LogAcessoMiddleware
+
+
+--node
+teste: node -v
+
+--instalando o laravel UI
+    dentro do projeto: composer require laravel/ui:^3.2
+    //se a versão for incompativel com o php
+    composer require --ignore-platform-req=ext-fileinfo laravel/ui:^3.2

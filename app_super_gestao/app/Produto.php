@@ -24,4 +24,13 @@ class Produto extends Model
     public function fornecedor(){
         return $this->belongsTo('App\Fornecedor');
     }
+
+    //eloquent ORM N para N
+    public function pedidos(){
+        //parametros: objeto de relacioanamento, tabela de relacionamento, nome fk mapeado pelo model da tabela de relaciomento,fk da tabela  utilizada no relacionamento
+        //quando o nome do objeto não esta no padrão de nomeclatura
+        //return $this->belongsToMany('App\Pedido','pedidos_produtos','produto_id','pedido_id');
+        return $this->belongsToMany('App\Pedido','pedidos_produtos');
+        
+    }
 }
