@@ -125,3 +125,9 @@ teste: node -v
     dentro do projeto: composer require laravel/ui:^3.2
     //se a versão for incompativel com o php
     composer require --ignore-platform-req=ext-fileinfo laravel/ui:^3.2
+
+    carregando o ui (scaffolding)
+    php artisan ui <front-end> --auth 
+    depois pelo CMD
+    npm install depois npm run dev (se der erro usar o arquivo baixado com as dependencias na pasta recursos)
+

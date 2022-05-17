@@ -1,5 +1,7 @@
 create database sg;
+create database ct;
 use sg;
+use ct;
 
 select * from migrations;
 
@@ -29,3 +31,6 @@ select * from clientes;
 select * from pedidos_produtos;
 
 select * from produto_detalhes;
+
+/*banco CT */
+select * from users
