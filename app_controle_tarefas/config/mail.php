@@ -71,6 +71,7 @@ return [
         'array' => [
             'transport' => 'array',
         ],
+
     ],
 
     /*

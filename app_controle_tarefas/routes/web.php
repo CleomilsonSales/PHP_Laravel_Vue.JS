@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\MensagemTesteMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //rota completa pq nessa versão o laravel o namespace (RouteServiceProvider) esta comentado, no estudo não vou habilitar professor pediu
 //autentificação pela rota
 Route::resource('tarefa','App\Http\Controllers\TarefaController');//->middleware('auth');
+
+Route::get('mensagem-teste',function(){
+    return new MensagemTesteMail();
+    /*Mail::to('cleomilsonsales@hotmail.com')->send(new MensagemTesteMail());
+    return 'Email enviado com sucesso';*/
+});
