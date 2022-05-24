@@ -18,12 +18,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//validação de email no cadastro
+Auth::routes(['verify'=>true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home')
+    ->middleware('verified');
+
 //rota completa pq nessa versão o laravel o namespace (RouteServiceProvider) esta comentado, no estudo não vou habilitar professor pediu
 //autentificação pela rota
-Route::resource('tarefa','App\Http\Controllers\TarefaController');//->middleware('auth');
+Route::resource('tarefa','App\Http\Controllers\TarefaController')
+    ->middleware('verified');//->middleware('auth');
 
 Route::get('mensagem-teste',function(){
     return new MensagemTesteMail();

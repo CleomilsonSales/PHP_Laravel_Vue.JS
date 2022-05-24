@@ -38,7 +38,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <!-- senha sera salva no padrão do php a bcrypt -->>
+                        <!-- senha sera salva no padrão do php a bcrypt -->
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Senha') }}</label>
 

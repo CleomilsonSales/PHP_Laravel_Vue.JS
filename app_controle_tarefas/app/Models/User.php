@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\RedefinirSenhaNotification;
+use App\Notifications\VerificarEmailNotification;
 
-class User extends Authenticatable
+
+/* para garantir que o email é da pessoa pelo processo de validação de email
+    olha a route/web */
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -45,5 +49,10 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token){
         //dd('chegamos ate aqui!');
         $this->notify(new RedefinirSenhaNotification($token, $this->email, $this->name));
+    }
+
+    public function sendEmailVerificationNotification(){
+        //dd('chegamos ate aqui!');
+        $this->notify(new VerificarEmailNotification($this->name));
     }
 }

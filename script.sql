@@ -33,4 +33,5 @@ select * from pedidos_produtos;
 select * from produto_detalhes;
 
 /*banco CT */
-select * from users
+select * from users;
+select * from tarefas;
