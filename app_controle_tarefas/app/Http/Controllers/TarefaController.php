@@ -44,11 +44,15 @@ class TarefaController extends Controller
             echo 'Não esta logado';
         };*/
 
-        $id = auth()->user()->id;
+        /*$id = auth()->user()->id;
         $nome = auth()->user()->name;
         $email = auth()->user()->email;
 
         echo "ID: $id Nome: $nome Email: $email esta logado";
+        */
+        $user_id = auth()->user()->id;
+        $tarefas = Tarefa::where('user_id', $user_id)->paginate(10);
+        return view('tarefa.index',['tarefas'=>$tarefas]);
 
     }
 
