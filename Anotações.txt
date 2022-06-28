@@ -133,3 +133,21 @@ teste: node -v
 
 --email pelo laravel
 	tem que habilitar o aplicação menos segura do gmail
+
+--exporta excel
+https://laravel-excel.com/
+em documentation/installation
+
+instalando:
+
+    composer require maatwebsite/excel=^3.1.0 (no acento não usar espaço)
+    se der erro: composer require maatwebsite/excel=^3.1.0 --ignore-platform-reqs   ou composer require maatwebsite/excel --ignore-platform-reqs
+
+    adicionar no arquivo app.php da pasta config: 
+    no provider
+    Maatwebsite\Excel\ExcelServiceProvider::class, 
+    no aliases
+    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        
+    publicando o arquivo de configuração
+    php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config    

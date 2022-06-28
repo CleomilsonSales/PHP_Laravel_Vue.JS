@@ -15,11 +15,12 @@ use App\Mail\MensagemTesteMail;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('bem-vindo');
 });
 
 //validação de email no cadastro
 Auth::routes(['verify'=>true]);
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('home')
