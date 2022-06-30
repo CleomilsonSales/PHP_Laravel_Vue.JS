@@ -151,3 +151,10 @@ instalando:
         
     publicando o arquivo de configuração
     php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config    
+
+    --exportando pra excel
+    --criando class de exportação
+    php artisan make:export TarefasExport --model=Tarefa
+
+    --caso der erro na importação descomentar a linha abaixo do php.ini
+    extension=php_fileinfo

@@ -21,6 +21,8 @@ Route::get('/', function () {
 //validação de email no cadastro
 Auth::routes(['verify'=>true]);
 
+Route::get('tarefa/exportacao/{extensao}','App\Http\Controllers\TarefaController@exportacao')
+    ->name('tarefa.exportacao');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('home')

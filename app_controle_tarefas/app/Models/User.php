@@ -55,4 +55,10 @@ class User extends Authenticatable implements MustVerifyEmail
         //dd('chegamos ate aqui!');
         $this->notify(new VerificarEmailNotification($this->name));
     }
+
+    public function tarefas(){
+        //hasMany (tem muitos)
+        //não preciso usar o nome real da tabela (tarefas) pq o laravel reconhece pelo padrão de nomeclaturas
+        return $this->hasMany('App\Models\Tarefa');
+    }
 }
