@@ -9,6 +9,7 @@ use Mail;
 use App\Mail\NovaTarefaMail;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TarefasExport;
+use PDF; //chamando pelo alias do config
 
 
 class TarefaController extends Controller
@@ -162,6 +163,14 @@ class TarefaController extends Controller
     }
 
     public function exportacao($extensao){
+        
+        if (in_array($extensao, ['xlsx','csv', 'pdf'])){
+            return Excel::download(new TarefasExport, 'lista_de_tarefa.'.$extensao);
+        }
+
+        return redirect()->route('tarefa.index');
+        
+        /* forma antiga
         $nome_arquivo = 'lista_de_tarefa';
 
         if ($extensao == 'xlsx'){
@@ -174,5 +183,18 @@ class TarefaController extends Controller
 
         //return Excel::download(new TarefasExport, 'lista_de_tarefa.xlsx');
         return Excel::download(new TarefasExport, $nome_arquivo);
+
+        */
+    }
+
+    public function exportar(){
+        $tarefas = auth()->user()->tarefas()->get();
+        $pdf = PDF::loadView('tarefa.pdf', ['tarefas'=>$tarefas]);
+        $pdf->setPaper('a4','landscape'); // ou portrait (retrato)
+        //baixar o arquivo
+        //return $pdf->download('lista_tarefas.pdf');
+
+        //stream abre no navegador
+        return $pdf->stream('lista_tarefas.pdf');
     }
 }

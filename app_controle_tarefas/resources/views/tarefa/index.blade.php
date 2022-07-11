@@ -14,7 +14,11 @@
                             <div class="float-right">
                                 <a href="{{ route('tarefa.create') }}" class="mr-3">Novo</a>
                                 <a href="{{ route('tarefa.exportacao',['extensao'=>'xlsx']) }}" class="mr-3">XLSX</a>
-                                <a href="{{ route('tarefa.exportacao',['extensao'=>'csv']) }}">CSV</a>
+                                <a href="{{ route('tarefa.exportacao',['extensao'=>'csv']) }}" class="mr-3">CSV</a>
+                                <a href="{{ route('tarefa.exportacao',['extensao'=>'pdf']) }}" class="mr-3">PDF - Excel</a>
+                                {{-- em download para ficar mais agradavel sem o _blank --}}
+                                {{--- <a href="{{ route('tarefa.exportar',['extensao'=>'pdf']) }}">PDF - DomPDF</a>  --}}
+                                <a href="{{ route('tarefa.exportar',['extensao'=>'pdf']) }}" target="_blank">PDF - DomPDF</a>
                             <div>
                         </div>
                     </div>

@@ -158,3 +158,16 @@ instalando:
 
     --caso der erro na importação descomentar a linha abaixo do php.ini
     extension=php_fileinfo
+
+    -- na exportação do csv ativar o use_bom para não ter problema com caracteres especiais
+
+    --exportando pdf com laravel excel
+    composer require mpdf/mpdf=^8.0.10 --ignore-platform-req=ext-gd
+    --lembrar de mudar o conf/excel para MPDF
+
+--instalando o DOMPDF
+link: https://github.com/barryvdh/laravel-dompdf
+    baixando pacote: composer require barryvdh/laravel-dompdf=^0.9.0 --ignore-platform-req=ext-gd
+    em providers do config/app.php: Barryvdh\DomPDF\ServiceProvider::class
+        depois alias: 'PDF' => Barryvdh\DomPDF\Facade::class
+    publicar pacote: php artisan vendor:publish --provider="Barryvdh\DomPDF\ServiceProvider"
