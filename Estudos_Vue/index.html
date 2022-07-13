@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- chamando o vue.js pelo arquivo-->
+    <script src="./vue.js"></script>
+    <!-- chamando pelo link cdn na ultima versão-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <title>Home</title>
+</head>
+
+<body>
+    <!-- Vue.JS-->
+    <div id="app">
+        Mensagem: {{ mensagem }} <br> Valor Total: {{ valorTotal }} <br> Logado: {{ logado }} <br> Hobbies: {{ hobbies[2] }} <br> perfil: {{ perfil.idade }}, Familia: {{ perfil.familia[1].nome }} <br>
+    </div>
+    <hr>
+    <div id="app2">
+        somar: {{ somar() }} <br> substrair: {{ subtrair() }} <br> multiplicar: {{ multiplicar() }} <br> dividir: {{ dividir() }}
+    </div>
+
+    <script>
+        options2 = {
+            el: '#app2', // elemento = # para selecionar por id | . para selecionar por class
+            data: {},
+            methods: {
+                somar: function somar() {
+                    return 4 + 2;
+                },
+                subtrair: function() { //função anônima
+                    return 4 - 2;
+                },
+                multiplicar: () => { //arrow function
+                    return 4 * 2;
+                },
+                dividir() { //forma enxuta de pares valores
+                    return 4 / 2;
+                }
+            }
+        }
+        const vm2 = new Vue(options2) //vm = ViewModel
+        console.log(vm2)
+    </script>
+
+    <script>
+        options = {
+            el: '#app', // elemento = # para selecionar por id | . para selecionar por class
+            data: { //data = variaveis ou atributos reativos
+                mensagem: 'primeiro template pelo vue', //string
+                valorTotal: 150.47, //number
+                logado: true, //boleano
+                hobbies: [
+                    'Dormir',
+                    'Comer',
+                    'Estudar'
+                ], //array
+                perfil: {
+                    nome: 'Cleomilson',
+                    idade: 38,
+                    familia: [{
+                        nome: 'Rita Miranda',
+                        parentesco: 'Esposa'
+                    }, {
+                        nome: 'Saori Miranda',
+                        parentesco: 'Filha'
+                    }]
+
+                }
+            }
+        }
+        const vm = new Vue(options) //vm = ViewModel
+        console.log(vm)
+    </script>
+
+</body>
+
+</html>

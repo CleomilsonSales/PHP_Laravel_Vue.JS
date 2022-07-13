@@ -171,3 +171,15 @@ link: https://github.com/barryvdh/laravel-dompdf
     em providers do config/app.php: Barryvdh\DomPDF\ServiceProvider::class
         depois alias: 'PDF' => Barryvdh\DomPDF\Facade::class
     publicar pacote: php artisan vendor:publish --provider="Barryvdh\DomPDF\ServiceProvider"
+
+Vue.JS
+    extensões:
+        -Vetur (Pine Wu)
+        -Live Server (Ritwick Dey) - 
+
+    instalação:
+        https://vuejs.org/
+        
+        framework baixado: pegar arquivo vue.js na pasta de estudos
+
+        testar o view: console do navegador e digitar vue
