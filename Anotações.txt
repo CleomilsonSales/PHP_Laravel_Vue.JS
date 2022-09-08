@@ -183,3 +183,5 @@ Vue.JS
         framework baixado: pegar arquivo vue.js na pasta de estudos
 
         testar o view: console do navegador e digitar vue
+
+        testes no navegador, botão direito no arquivo index.html e abrir no Live Server

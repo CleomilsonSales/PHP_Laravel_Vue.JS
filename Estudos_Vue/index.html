@@ -10,6 +10,20 @@
     <!-- chamando pelo link cdn na ultima versão-->
     <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <title>Home</title>
+    <style>
+        .vermelho {
+            color: red;
+        }
+        
+        .verde {
+            background-color: green;
+            font-weight: bold;
+        }
+        
+        .negrito {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,24 +34,48 @@
     <hr>
     <div id="app2">
         somar: {{ somar() }} <br> substrair: {{ subtrair() }} <br> multiplicar: {{ multiplicar() }} <br> dividir: {{ dividir() }}
+        <hr>
+        <a v-bind:href="site"> Site</a>
+        <p v-bind:class="cor" class="negrito"> Diretiva v-bind </p>
+        <input type="text" v-bind:placeholder="preencher">
+        <!-- v-bind pode ser usando omitindo a expressão v-bind, ficaria apenas :href-->
+        <input type="checkbox" :checked="check">
+        <br> {{ preencher.length }}
+        <br> {{ preencher.substr(0,5) }}
+        <input :value="2 + 2" :class="teste ? 'verde' : cor">
     </div>
 
     <script>
         options2 = {
             el: '#app2', // elemento = # para selecionar por id | . para selecionar por class
-            data: {},
+            data: {
+                n1: 10,
+                n2: 5,
+                site: 'https://www.google.com/',
+                cor: 'vermelho',
+                preencher: 'Diretiva v-bind',
+                check: true,
+                teste: true
+            },
             methods: {
                 somar: function somar() {
-                    return 4 + 2;
+                    return this.n1 + this.n2;
                 },
                 subtrair: function() { //função anônima
-                    return 4 - 2;
+                    return this.n1 - this.n2;
                 },
                 multiplicar: () => { //arrow function
-                    return 4 * 2;
+                    return this.n1 * this.n2; //ver o contexto léxico (variaveis da window), não dar pra chamar direto o this.
                 },
                 dividir() { //forma enxuta de pares valores
-                    return 4 / 2;
+                    //teste arrow function dentro de um function (não vai pelas variveis da windw)
+                    let f = () => {
+                        return 'Teste arrow function dentro de um function';
+                    }
+
+                    console.log(f());
+                    //--fim
+                    return this.n1 / this.n2;
                 }
             }
         }
@@ -50,25 +88,7 @@
             el: '#app', // elemento = # para selecionar por id | . para selecionar por class
             data: { //data = variaveis ou atributos reativos
                 mensagem: 'primeiro template pelo vue', //string
-                valorTotal: 150.47, //number
-                logado: true, //boleano
-                hobbies: [
-                    'Dormir',
-                    'Comer',
-                    'Estudar'
-                ], //array
-                perfil: {
-                    nome: 'Cleomilson',
-                    idade: 38,
-                    familia: [{
-                        nome: 'Rita Miranda',
-                        parentesco: 'Esposa'
-                    }, {
-                        nome: 'Saori Miranda',
-                        parentesco: 'Filha'
-                    }]
 
-                }
             }
         }
         const vm = new Vue(options) //vm = ViewModel
