@@ -15,6 +15,11 @@
             color: red;
         }
         
+        .azul {
+            background-color: blue;
+            font-weight: bold;
+        }
+        
         .verde {
             background-color: green;
             font-weight: bold;
@@ -22,6 +27,21 @@
         
         .negrito {
             font-weight: bold;
+        }
+        
+        .borda {
+            border: 1px solid
+        }
+        
+        .div-principal {
+            width: 200px;
+            height: 200px;
+        }
+        
+        .div-comum {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
         }
     </style>
 </head>
@@ -44,6 +64,71 @@
         <br> {{ preencher.substr(0,5) }}
         <input :value="2 + 2" :class="teste ? 'verde' : cor">
     </div>
+    <hr>
+    <div id="app3">
+        <!-- Chamar function por eventos -->
+        <input type="text" v-on:keyup="imprimirTexto('Teste',5,v_bol)">
+        <!-- v-on pode ser apenas um @ -->
+        <button @click="mensagemAlerta()">Alerta</button>
+        <button @click="mensagemAlerta2($event, 'texto', 100)">Passando evento</button>
+    </div>
+    <hr>
+    <div id="app4">
+        <div class="borda div-principal" :class="cor">
+            Cor: {{ cor }}
+            <br> Posição X do mouse: {{ posicaoX }} <br> Posição Y do mouse: {{ posicaoY }}
+        </div>
+        <hr>
+        <div @click="mudarCor('verde')" class="borda div-comum"></div>
+        <div @mouseover="mudarCor('vermelho')" @mouseout="mudarCor('azul')" class=" borda div-comum "></div>
+        <div @mousemove="coordenadas($event)" class="borda div-comum "></div>
+    </div>
+    <hr>
+
+
+    <script>
+        const vm4 = new Vue({
+            el: '#app4',
+            data: {
+                cor: 'branco',
+                posicaoX: 0,
+                posicaoY: 0
+            },
+            methods: {
+                mudarCor(c) {
+                    this.cor = c
+                },
+                coordenadas(e) {
+                    this.posicaoX = e.clientX
+                    this.posicaoY = e.clientY
+                }
+            }
+        })
+    </script>
+
+    <script>
+        const vm3 = new Vue({
+            el: '#app3',
+            data: {
+                v_bol: true,
+                v_bol2: false
+            },
+            methods: {
+                imprimirTexto(p_texto, p_num, p_v_bol) {
+                    console.log(p_texto)
+                    console.log(p_num)
+                    console.log(p_v_bol)
+                    console.log(this.v_bol2)
+                },
+                mensagemAlerta() {
+                    alert('Mensagem de alerta')
+                },
+                mensagemAlerta2(evento, p1, p2) {
+                    console.log(evento, p1, p2)
+                }
+            }
+        })
+    </script>
 
     <script>
         options2 = {
