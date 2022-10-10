@@ -84,8 +84,106 @@
         <div @mousemove="coordenadas($event)" class="borda div-comum "></div>
     </div>
     <hr>
+    <div id="app5">
+        <a href="http://www.google.com" target="_blank" v-on:click="prevenirComportamentoPadrao($event)">Abrir site</a> <br> Mensagem: {{ msg }}
+        <br>
+        <button @click.once="executarUmaVez()">Vai</button>
+        <br> Clique: {{ cliques }}
+        <hr>
+        <form @submit.prevent.once="prevenirExecutarUmaVez()">
+            <button type="submit">Enviar</button>
+        </form>
+        <p>Formulario: {{ formulario }}</p>
+        <hr>
+        <!--keyup.x quer dizer que ocorrer quando for a tecla x -->
+        <input type="text" @keyup.x.Enter="capturaTeclas($event)">
+        <p>Teclas: {{ teclas }}</p>
+    </div>
+    <hr>
+    <div id="app6">
+        <!-- elemento filho -->
+        <input type="text" id="inputTexto">
+        <button @click="selecioneElementoFilho()">Botão</button>
+        <p id="paragrafo" style="color:red">Paragrafo</p>
+    </div>
+    <hr>
 
+    <div id="app7">
+        <!-- estou negando o valor do exibirSaldo-->
+        <!--toggle-->
+        <button @click="exibirSaldo = !exibirSaldo">
+            <span v-if="!exibirSaldo"> Exibir Saldo</span>
+            <span v-if="exibirSaldo"> Ocultar Saldo</span>
+        </button>
+        <p> Saldo: <span v-if="exibirSaldo"> R$ {{ saldo }}</span></p>
+        <br>
+        <!-- v-if e v-else -->
+        Idade: <input type="text" id="inputIdade" @blur="setIdate()">
+        <p v-if="idade < 18">Menor de idade </p>
+        <p v-else-if="idade > 17 && idade < 19">Se lascou</p>
+        <p v-else>Maior de idade </p>
+    </div>
+    <hr>
 
+    <script>
+        const vm7 = new Vue({
+            el: '#app7',
+            data: {
+                saldo: 4570.17,
+                exibirSaldo: false,
+                idade: 0
+            },
+            methods: {
+                setIdate() {
+                    this.idade = inputIdade.value
+                }
+            }
+        })
+    </script>
+
+    <script>
+        const vm6 = new Vue({
+            el: '#app6',
+            data: {},
+            methods: {
+                selecioneElementoFilho() {
+                    console.log(inputTexto.value)
+                    console.log(inputTexto)
+                    console.log(paragrafo.style.color)
+                    console.log(paragrafo.innerHTML)
+                }
+            }
+        })
+    </script>
+
+    <script>
+        const vm5 = new Vue({
+            el: '#app5',
+            data: {
+                msg: '',
+                cliques: 0,
+                formulario: '',
+                teclas: ''
+            },
+            methods: {
+                prevenirComportamentoPadrao(evento) {
+                    //prevent evita que algo aconteça no click, isso pode ser colocado diretamento no click
+                    evento.preventDefault();
+
+                    this.msg = 'Comportamente padrão ativado'
+                },
+                executarUmaVez() {
+                    this.cliques++
+                },
+                prevenirExecutarUmaVez() {
+                    this.formulario = 'Prevenindo o comportamento padrão'
+                },
+                capturaTeclas(evento) {
+                    this.teclas += evento.key
+                }
+            }
+        })
+    </script>
     <script>
         const vm4 = new Vue({
             el: '#app4',
