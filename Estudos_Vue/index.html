@@ -125,6 +125,146 @@
     </div>
     <hr>
 
+    <div id="app8">
+        <p @mouseover="ExibirTextoAjuda = true" @mouseout="ExibirTextoAjuda = false"> Exemplo tooptip (v-show) passe o mouse</p>
+        <div v-show="ExibirTextoAjuda">
+            <h3>Titulo Texto</h3>
+            <p>conteudo texto</p>
+        </div>
+
+    </div>
+    <hr>
+
+    <div id="app9">
+        <!-- <div v-text="elementosHTML">Esse texto sera limpo</div> -->
+        <div v-html="elementosHTML">Esse texto sera limpo</div>
+    </div>
+    <hr>
+    <div id="app10">
+        <!-- v-once não deixar o valor ser afetado mais -->
+        <p v-once>Saldo inicial: {{ saldo }}</p>
+        <p>Saldo Atualizado: {{ saldo }}</p>
+        <input type="text" id="valor">
+        <button @click="creditar()">Creditar</button>
+        <button @click="debitar()">Debitar</button>
+    </div>
+    <hr>
+    <div id="app11">
+        <ul>
+            <li v-for="(curso, key) in cursos" v-text="key + '-' + curso">{{ key }}-{{ curso }}</li>
+        </ul>
+        <br>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TITULO</th>
+                    <th>DESCRICAO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- pode-se usar o destructuring assignment onde ao inves de trazer tudo em curso2, poderia trazer apenas elementos dele-->
+                <!-- ex: <tr v-for="({titulo}, chave) in cursos2 "> -->
+                <!-- <td>{{ titulo }}</td> -->
+                <tr v-for="(curso2, chave) in cursos2 ">
+                    <td>{{ chave }}</td>
+                    <td>{{ curso2.titulo }}</td>
+                    <td>{{ curso2.descricao }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <ul>
+            <!-- : é o mesmo que v-bind-->
+            <li v-for="p in publicacoes" style="border: solid 1px; margin-buttom:10px" :key="p.id">
+                <div>
+                    {{ p.publicacao }}
+                    <hr>
+                    <input type="text">
+                </div>
+            </li>
+        </ul>
+        <button @click="misturarArray()">Misturar publicações</button>
+    </div>
+    <hr>
+
+    <script>
+        const vm11 = new Vue({
+            el: '#app11',
+            data: {
+                cursos: ['laravel', 'Web completo', 'banco de dados', 'angular'],
+                cursos2: {
+                    1000: {
+                        titulo: 'Laravel',
+                        descricao: 'dominando'
+                    },
+                    1001: {
+                        titulo: 'Banco de dados',
+                        descricao: 'dominando banco de dados'
+                    }
+                },
+                publicacoes: [{
+                    id: 1,
+                    publicacao: 'publicacao 1'
+                }, {
+                    id: 2,
+                    publicacao: 'publicacao 2'
+                }, {
+                    id: 3,
+                    publicacao: 'publicacao 3'
+                }, ]
+            },
+            methods: {
+                misturarArray() {
+                    let misturado = []
+
+                    misturado[0] = this.publicacoes[2]
+                    misturado[1] = this.publicacoes[0]
+                    misturado[2] = this.publicacoes[1]
+
+                    this.publicacoes = misturado
+                }
+            }
+        })
+    </script>
+
+    <script>
+        const vm10 = new Vue({
+            el: '#app10',
+            data: {
+                saldo: 1100
+            },
+            methods: {
+                creditar() {
+                    this.saldo += parseFloat(valor.value)
+                },
+                debitar() {
+                    this.saldo -= parseFloat(valor.value)
+                }
+            }
+        })
+    </script>
+
+    <script>
+        const vm9 = new Vue({
+            el: '#app9',
+            data: {
+                elementosHTML: '<p><b>Site</b></p><a href="http://www.google.com.br">Cliqui aqui</a>'
+            },
+            methods: {}
+        })
+    </script>
+
+    <script>
+        const vm8 = new Vue({
+            el: '#app8',
+            data: {
+                ExibirTextoAjuda: false
+            },
+            methods: {}
+        })
+    </script>
+
     <script>
         const vm7 = new Vue({
             el: '#app7',
