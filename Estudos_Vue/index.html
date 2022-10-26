@@ -185,13 +185,187 @@
             </li>
         </ul>
         <button @click="misturarArray()">Misturar publicações</button>
+        <!-- laços reativo -->
+        <ul>
+            <li v-for="c in comentarios">
+                {{ c.id }} - {{ c.comentario }}
+            </li>
+            <button @click="adicionarElementos()">Adicionar Comentario</button>
+            <button @click="removerElementos()">Remover Comentario</button>
+            <button @click="atualizarElementos()">Atualizar Comentario</button>
+        </ul>
     </div>
     <hr>
+
+    <div id="app12">
+        <!-- template não é rederizada no browser (não aparece no console)-->
+        <template v-for="n in 10">
+            <p>
+                2 x {{ n }} = {{ n*2 }}
+            </p>
+        </template>
+        <hr>
+
+        <h4>Adicionar Paciente</h4>
+        <span>Nome: </span><input type="text" id="inputNome"><br>
+        <span>Idade: </span><input type="text" id="inputIdade"><br>
+        <span>Plano: </span><input type="text" id="inputPlano"><br>
+        <button @click="adicionarPaciente()">Adicionar</button>
+
+        <h4>Ultimo Paciente Cadastrados</h4>
+        <p v-if="pacientes.length > 0">
+            Paciente: {{ pacientes[pacientes.length - 1].nome }}
+            <!-- computed -->
+            {{ ultimoPaciente }}
+        </p>
+
+        <h4>Pacientes Plano Ouro</h4>
+
+        <!-- antes: <p v-for="p in pacientes">{{ p.plano == 'ouro' ? p.nome : '' }}</p> -->
+        <p v-for="p in pacientePlanoOuro">{{ p.nome }}</p>
+
+        <h4>Paciente Cadastrados</h4>
+        <p v-for="p in pacientes">{{ p.nome }}</p>
+    </div>
+    <hr>
+
+    <div id="app13">
+        {{ paciente }}<br>
+        <!-- 
+            v-bind do vue para o template 
+            v-on é do template para vue
+        -->
+        <!-- antes do v-model (two-way-data binding)
+            <input type="text" v-bind:value="paciente" v-on:keyup="setPaciente($event)">
+        -->
+        <input type="text" v-model="paciente">
+        <hr>
+        <input type="radio" value="f" v-model="sexo">Feminino
+        <input type="radio" value="m" v-model="sexo">Masculino
+        <br> {{ sexo }}
+        <hr>
+        <select v-model="plano">
+            <option value="" disabled>Selecione um plano</option>
+            <option value="1">Basico1</option>
+            <option value="2">Basico2</option>
+            <option value="3">Basico3</option>
+        </select>
+        <br> {{ plano }}
+        <hr>
+        <input type="checkbox" value="100" v-model="doencas">Asma
+        <input type="checkbox" value="101" v-model="doencas">Diabetes
+        <input type="checkbox" value="102" v-model="doencas">Renite
+        <br> {{ doencas }}
+    </div>
+    <hr>
+
+    <div id="app14">
+        <!-- observer-->
+        <span>Paciente: </span><input type="text" v-model="paciente">
+        <br>
+        <ul>
+            <li v-for="l in lista">{{ l.nome }}, {{ l.idade }}</li>
+        </ul>
+    </div>
+    <hr>
+
+    <script>
+        const vm14 = new Vue({
+            el: '#app14',
+            data: {
+                paciente: '',
+                pacientes: [{
+                    nome: 'Cleomilson',
+                    idade: 39
+                }, {
+                    nome: 'Cleber',
+                    idade: 60
+                }, {
+                    nome: 'Cleosmar',
+                    idade: 92
+                }, {
+                    nome: 'Cleomilton',
+                    idade: 18
+                }],
+                lista: []
+            },
+            methods: {},
+            computed: {},
+            watch: {
+                //nome do metodo tem que ser igual ao do atributo
+                paciente(valorNovo, valorAntigo) {
+                    this.lista = this.pacientes.filter(p => p.nome.match(valorNovo))
+                }
+            }
+        })
+    </script>
+
+    <script>
+        const vm13 = new Vue({
+            el: '#app13',
+            data: {
+                paciente: 'Cleomilson Sales',
+                sexo: '',
+                plano: '',
+                doencas: []
+            },
+            methods: {
+                setPaciente(e) {
+                    this.paciente = e.target.value
+                }
+            },
+            computed: {
+
+            }
+        })
+    </script>
+
+    <script>
+        const vm12 = new Vue({
+            el: '#app12',
+            data: {
+                pacientes: []
+            },
+            methods: {
+                adicionarPaciente() {
+                    this.pacientes.push({
+                        nome: inputNome.value,
+                        idade: inputIdade.value,
+                        plano: inputPlano.value
+                    })
+                }
+            },
+            computed: {
+                ultimoPaciente() {
+                    let key = this.pacientes.length - 1
+                    let txt = ''
+
+                    txt += ', Idade: ' + this.pacientes[key].idade
+                    txt += ', Plano: ' + this.pacientes[key].plano
+
+                    return txt.toUpperCase()
+                },
+                pacientePlanoOuro() {
+                    return this.pacientes.filter(item => item.plano == 'ouro')
+                }
+            }
+        })
+    </script>
 
     <script>
         const vm11 = new Vue({
             el: '#app11',
             data: {
+                comentarios: [{
+                    id: 1,
+                    comentario: 'ComentarioReativo1'
+                }, {
+                    id: 2,
+                    comentario: 'ComentarioReativo2'
+                }, {
+                    id: 3,
+                    comentario: 'ComentarioReativo3'
+                }],
                 cursos: ['laravel', 'Web completo', 'banco de dados', 'angular'],
                 cursos2: {
                     1000: {
@@ -223,6 +397,25 @@
                     misturado[2] = this.publicacoes[1]
 
                     this.publicacoes = misturado
+                },
+                adicionarElementos() {
+                    this.comentarios.push({
+                        id: 4,
+                        comentario: 'Novo comentario'
+                    })
+                },
+                removerElementos() {
+                    this.comentarios.pop()
+                },
+                atualizarElementos() {
+                    //this.$set(<array>,<chave>,<novo valor>)
+                    this.$set(
+                        this.comentarios,
+                        1, {
+                            id: 2,
+                            comentario: 'Atualizou comentario'
+                        }
+                    )
                 }
             }
         })
