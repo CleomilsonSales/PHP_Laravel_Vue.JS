@@ -7,6 +7,10 @@ instalar composer que é um gerenciador dos pacote do PHP;
 1: composer config -g repo.packagist composer https://packagist.org
 2: composer config -g github-protocols https ssh
 instalar o laravel que é o framework:
+//criando o projeto laravel
+//dica roda esse codigo fora do vscode, dar menos erro, melhor usa um bash ou cmd
+composer create-project --prefer-dist laravel/laravel=8.5.9 nome_aplicativo
+//outras formas
 -composer create-project --prefer-dist laravel/laravel projeto_laravel_via_composer "7.0"
 //caso haja problema de compatibilidade do php com o laravel mas ver usar esse versão mesmo assim, incluir o comando: --ignore-platform-req=ext-fileinfo
 -composer create-project --ignore-platform-req=ext-fileinfo laravel/laravel app_controle_tarefas "8.5.9"
@@ -15,9 +19,12 @@ instalar o laravel que é o framework:
 
 composer create-project  php laravel/laravel app_controle_tarefas "8.5.9"
 
-
-
 -Comandos artisan:
+//erro a iniciar o artisan serve
+composer i
+//depois
+composer update
+
 -criando um controller:
     php artisan make:controller PrincipalController
 
@@ -164,6 +171,15 @@ instalando:
     --exportando pdf com laravel excel
     composer require mpdf/mpdf=^8.0.10 --ignore-platform-req=ext-gd
     --lembrar de mudar o conf/excel para MPDF
+
+continuando laravel
+//é possivel criar model, migration e controller na minha linha de comando
+//lembrando que resource são os metodos padrões dos controllers
+php artisan make:model --migration --controller --resource NOME
+//pode abreviar com as iniciais
+php artisan make:model -mcr NOME
+//ou 
+php artisan make:model --all NOME ou php artisan make:model -a NOME
 
 --instalando o DOMPDF
 link: https://github.com/barryvdh/laravel-dompdf
